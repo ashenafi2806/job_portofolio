@@ -302,12 +302,12 @@ export default function WhatYouGetPage() {
               extra to buy.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-[#FF6B35] hover:bg-[#FF8C5A] text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors shadow-lg hover:shadow-xl">
+              <Link href="/" className="bg-[#FF6B35] hover:bg-[#FF8C5A] text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors shadow-lg hover:shadow-xl">
                 🚀 Start Your Transformation
-              </button>
-              <button className="border-2 border-gray-300 text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-bold text-lg transition-colors">
+              </Link>
+              <Link href="/contact" className="border-2 border-gray-300 text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-bold text-lg transition-colors">
                 📞 Talk to Our Experts
-              </button>
+              </Link>
             </div>
           </motion.div>
         </div>
