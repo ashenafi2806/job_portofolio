@@ -18,20 +18,11 @@ const navItems: NavItem[] = [
     children: [
       { label: "Medical Device Management", href: "/medical-device-features" },
       { label: "General ERP Modules", href: "/erp-core-modules" },
-      { label: "Service Management", href: "#service-management" },
+      
       
     ],
   },
-  {
-    label: "Features",
-    href: "#features",
-    children: [
-      { label: "Inventory Tracking", href: "#inventory" },
-      { label: "Regulatory Compliance", href: "#regulatory" },
-      { label: "Service Scheduling", href: "#scheduling" },
-      { label: "Analytics & Reporting", href: "#analytics" },
-    ],
-  },
+  
   { label: "Why Choose Us", href: "/why-choose-us" },
   { label: "What You Get", href: "/what-you-get" },
   { label: "Contact", href: "/contact" },

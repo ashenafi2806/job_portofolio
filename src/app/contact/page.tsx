@@ -28,7 +28,7 @@ export default function ContactPage() {
           <p className="text-gray-500 leading-relaxed">
             Tel : +251927423606
             <br />
-            Tel : +251953442540
+            Tel : +251922681360
           </p>
         </div>
 

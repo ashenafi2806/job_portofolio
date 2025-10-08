@@ -219,27 +219,7 @@
 
                   <h3 className="w-full text-3xl font-bold whitespace-pre-line leading-snug mb-6 px-10">{card.title}</h3>
 
-                  <div className="mt-auto">
-                    <motion.button
-                      className="mt-8 bg-transparent border-2 border-white text-white py-2 px-6 rounded-full text-sm font-medium flex items-center justify-center focus:outline-none"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                      onClick={()=>{
-                        if(card.type=="INVENTORY"){
-                          router.push("/medical-device-features")
-                        }
-                        else if (card.type=="ERP"){
-                          router.push("/erp-core-modules")
-                        }
-                        else if(card.type=="SERVICE"){
-                          router.push("/#service-management")
-                        }
-                      }}
-                    >
-                      {getButtonText(card.type as FeatureCard["type"])}
-                      <ChevronRight className="ml-2 h-4 w-4" />
-                    </motion.button>
-                  </div>
+                  
                 </div>
               </motion.div>
             </div>

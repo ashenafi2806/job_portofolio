@@ -20,7 +20,7 @@ export default function Footer() {
             <div className="space-y-2 text-gray-400">
               <p>www.innovation-labs-et.com</p>
               <p>0927423606</p>
-              <p>0953442540</p>
+              <p>0922681360</p>
               <p>feventadele9@gmail.com</p>
               <p>ekefelegn1488@gmail.com</p>
             </div>
@@ -36,12 +36,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/medical-device-features" className="hover:text-[#FF6B35] transition-colors">
-                  Service Management
-                </Link>
-              </li>
-              <li>
-                <Link href="#inventory" className="hover:text-[#FF6B35] transition-colors">
-                  Inventory Control
+                  Medical Device management
                 </Link>
               </li>
               
@@ -52,24 +47,23 @@ export default function Footer() {
             <h3 className="font-bold mb-4">Industries</h3>
             <ul className="space-y-2 text-gray-400">
               <li>
-                <Link href="#importers" className="hover:text-[#FF6B35] transition-colors">
+                
                   Medical Device Importers
-                </Link>
+                
               </li>
               <li>
-                <Link href="#distributors" className="hover:text-[#FF6B35] transition-colors">
                   Healthcare Distributors
-                </Link>
+                
               </li>
               <li>
-                <Link href="#providers" className="hover:text-[#FF6B35] transition-colors">
+                
                   Service Providers
-                </Link>
+               
               </li>
               <li>
-                <Link href="#manufacturers" className="hover:text-[#FF6B35] transition-colors">
+               
                   Equipment Manufacturers
-                </Link>
+                
               </li>
             </ul>
           </div>

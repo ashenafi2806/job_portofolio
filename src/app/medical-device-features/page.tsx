@@ -11,6 +11,7 @@ import {
   Database,
   AlertTriangle,
   Clock,
+  Briefcase
 } from "lucide-react"
 import { motion } from "framer-motion"
 export default function MedicalDeviceFeaturesPage() {
@@ -144,6 +145,19 @@ export default function MedicalDeviceFeaturesPage() {
         "Performance monitoring",
       ],
       color: "bg-pink-100 text-pink-600",
+    },
+    {
+      icon: <Briefcase className="h-8 w-8" />,
+      title: "Tender Management Service",
+      description: "Streamline tender processes and bid management for medical devices",
+      details: [
+        "Tender opportunity tracking and alerts",
+        "Automated bid document preparation",
+        "Compliance verification for tender requirements",
+        "Bid submission tracking and deadlines",
+        "Historical tender performance analytics",
+      ],
+      color: "bg-cyan-100 text-cyan-600",
     },
   ]
 

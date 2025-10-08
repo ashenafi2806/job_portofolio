@@ -1,7 +1,7 @@
 "use client"
 import { Users, Zap, TrendingUp, Shield, Clock, Award} from "lucide-react"
 import { motion } from "framer-motion"
-
+import Link from "next/link"
 export default function WhyChooseUsPage() {
   const benefits = [
     {
@@ -207,12 +207,12 @@ export default function WhyChooseUsPage() {
               growth with our proven system.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg transition-colors shadow-lg hover:shadow-xl">
+              <Link href="/" className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg transition-colors shadow-lg hover:shadow-xl">
                 🚀 Start Your Transformation
-              </button>
-              <button className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-lg font-bold text-lg transition-colors">
+              </Link>
+              <Link href="/contact" className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-lg font-bold text-lg transition-colors">
                 📞 Talk to Our Experts
-              </button>
+              </Link>
             </div>
           </motion.div>
         </div>
