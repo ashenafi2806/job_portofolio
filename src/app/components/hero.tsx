@@ -90,17 +90,7 @@ export default function Hero() {
                 {slide.description}
               </motion.p>
 
-              <motion.button
-                className="bg-[#FF6B35] hover:bg-[#FF8C5A] mt-5 text-white font-medium py-3 px-6 rounded-full transition-colors mb-20"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{
-                  opacity: activeSlide === index ? 1 : 0,
-                  y: activeSlide === index ? 0 : 20,
-                }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-              >
-                Get Started
-              </motion.button>
+              
             </div>
           </div>
         </div>
