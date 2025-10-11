@@ -47,9 +47,9 @@ export default function ResultsCarousel() {
     }
   }
 
-const goToSlide = (index: number) => {
+  const goToSlide = (index: number) => {
     setCurrentIndex(index)
-}
+  }
 
   return (
     <div className="w-full py-16 px-4 sm:px-6 lg:px-8 bg-white">
@@ -58,12 +58,12 @@ const goToSlide = (index: number) => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="relative left-[10vw] top-[-12vw] text-3xl md:text-4xl font-bold mb-12 text-black "
+        className="text-3xl md:text-4xl font-bold mb-12 text-black"
       >
         Results We&apos;ve Delivered
       </motion.h2>
 
-      <div className="relative mx-auto max-w-[90vw] left-[10vw] top-[-6vw]">
+      <div className="relative mx-auto max-w-6xl">
         <div className="overflow-hidden">
           <div
             className="flex transition-transform duration-500 gap-5 ease-in-out"
@@ -77,7 +77,6 @@ const goToSlide = (index: number) => {
                 <div className="bg-white p-6 h-70 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center items-center text-center space-y-8">
                   <h3 className="text-4xl md:text-5xl font-bold mb-6 text-[#FF6B35]">{item.title}</h3>
                   <p className="text-black text-lg mt-4 mb-6">{item.description}</p>
-                 
                 </div>
               </div>
             ))}
