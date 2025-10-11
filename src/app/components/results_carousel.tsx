@@ -85,12 +85,12 @@ export default function ResultsCarousel() {
           <div
             className="flex transition-transform duration-500 ease-in-out"
             style={{
-              transform: `translateX(-${currentIndex * cardWidth * cardsToShow}%)`,
-              width: `${results.length * (100 / cardsToShow)}%`,
+              transform: `translateX(-${currentIndex * (100 / cardsToShow)}%)`,
+              width: `${(results.length / cardsToShow) * 100}%`,
             }}
           >
             {results.map((item, index) => (
-              <div key={index} className="flex-shrink-0 px-2 sm:px-3" style={{ width: `${cardWidth}%` }}>
+              <div key={index} className="flex-shrink-0 px-2 sm:px-3" style={{ width: `${100 / results.length}%` }}>
                 <div className="bg-white p-4 sm:p-6 lg:p-8 min-h-[220px] sm:min-h-[260px] lg:min-h-[280px] border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center items-center text-center space-y-4 sm:space-y-6">
                   <h3 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#FF6B35]">{item.title}</h3>
                   <p className="text-black text-base sm:text-lg lg:text-xl leading-relaxed">{item.description}</p>
