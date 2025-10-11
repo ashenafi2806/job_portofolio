@@ -50,7 +50,7 @@ export default function ResultsCarousel() {
     return () => window.removeEventListener("resize", updateCardsToShow)
   }, [])
 
-  const cardWidthPercentage = 100 / cardsToShow
+  const cardWidth = 100 / results.length
 
   const handlePrev = () => {
     if (currentIndex > 0) {
@@ -83,21 +83,17 @@ export default function ResultsCarousel() {
       <div className="relative mx-auto max-w-6xl">
         <div className="overflow-hidden">
           <div
-            className="flex transition-transform duration-500 gap-3 sm:gap-4 lg:gap-5 ease-in-out"
+            className="flex transition-transform duration-500 ease-in-out"
             style={{
-              transform: `translateX(-${currentIndex * cardWidthPercentage}%)`,
-              width: `${(results.length * 100) / cardsToShow}%`,
+              transform: `translateX(-${currentIndex * cardWidth * cardsToShow}%)`,
+              width: `${results.length * (100 / cardsToShow)}%`,
             }}
           >
             {results.map((item, index) => (
-              <div
-                key={index}
-                className="px-1 sm:px-2 flex-shrink-0"
-                style={{ width: `${cardWidthPercentage * 0.9}%` }}
-              >
-                <div className="bg-white p-4 sm:p-6 min-h-[200px] sm:min-h-[240px] border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center items-center text-center space-y-3 sm:space-y-6">
-                  <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#FF6B35]">{item.title}</h3>
-                  <p className="text-black text-sm sm:text-base lg:text-lg leading-snug">{item.description}</p>
+              <div key={index} className="flex-shrink-0 px-2 sm:px-3" style={{ width: `${cardWidth}%` }}>
+                <div className="bg-white p-4 sm:p-6 lg:p-8 min-h-[220px] sm:min-h-[260px] lg:min-h-[280px] border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center items-center text-center space-y-4 sm:space-y-6">
+                  <h3 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#FF6B35]">{item.title}</h3>
+                  <p className="text-black text-base sm:text-lg lg:text-xl leading-relaxed">{item.description}</p>
                 </div>
               </div>
             ))}
