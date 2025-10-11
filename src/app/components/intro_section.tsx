@@ -4,9 +4,9 @@ import { ChevronRight } from "lucide-react"
 
 export default function IntroSection() {
   return (
-    <section className="w-full py-50 bg-white">
+    <section className="w-full py-12 md:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row items-start gap-4 md:gap-16">
+        <div className="flex flex-col md:flex-row items-start gap-8 md:gap-16">
           <motion.div
             className="md:w-1/2"
             initial={{ opacity: 0, y: 20 }}
@@ -17,7 +17,7 @@ export default function IntroSection() {
             }}
             viewport={{ once: true, margin: "0px 0px -50px 0px" }}
           >
-            <h1 className="text-black font-bold text-2xl md:text-3xl lg:text-4xl  leading-tight tracking-tight relative left-[10vw] top-[-6vw]">
+            <h1 className="text-black font-bold text-2xl md:text-3xl lg:text-4xl leading-tight tracking-tight">
               Medical Device
               <br />
               Management
@@ -28,7 +28,7 @@ export default function IntroSection() {
 
           <div className="md:w-1/2">
             <motion.p
-              className="text-lg md:text-xl text-black mb-8 leading-relaxed relative top-[-6vw] right-[10vw]"
+              className="text-base md:text-lg lg:text-xl text-black mb-8 leading-relaxed"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{
                 opacity: 1,
@@ -45,7 +45,7 @@ export default function IntroSection() {
             <motion.div className="inline-block">
               <a
                 href="#"
-                className="inline-flex items-center text-orange-500 font-medium text-lg hover:text-orange-600 transition-colors relative top-[-4vw] right-[10vw]"
+                className="inline-flex items-center text-orange-500 font-medium text-base md:text-lg hover:text-orange-600 transition-colors"
               >
                 Learn more
                 <motion.span
