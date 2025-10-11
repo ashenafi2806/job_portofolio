@@ -85,7 +85,7 @@ export default function ResultsCarousel() {
           <div
             className="flex transition-transform duration-500 ease-in-out"
             style={{
-              transform: `translateX(-${currentIndex * (100 / cardsToShow)}%)`,
+              transform: `translateX(-${currentIndex * ((100 * cardsToShow) / results.length)}%)`,
               width: `${(results.length / cardsToShow) * 100}%`,
             }}
           >
