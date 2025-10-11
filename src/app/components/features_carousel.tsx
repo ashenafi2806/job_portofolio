@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { motion } from "framer-motion"
 import { useRouter } from "next/navigation"
@@ -114,25 +114,41 @@ export default function FeaturesCarousel() {
     },
   ]
 
+  const [visibleCount, setVisibleCount] = useState(1)
   const [startIndex, setStartIndex] = useState(0)
-  const visibleCount = 3
+
+  useEffect(() => {
+    const updateVisibleCount = () => {
+      if (window.innerWidth >= 1024) {
+        setVisibleCount(3) // Desktop: 3 cards
+      } else if (window.innerWidth >= 640) {
+        setVisibleCount(2) // Tablet: 2 cards
+      } else {
+        setVisibleCount(1) // Mobile: 1 card
+      }
+    }
+
+    updateVisibleCount()
+    window.addEventListener("resize", updateVisibleCount)
+    return () => window.removeEventListener("resize", updateVisibleCount)
+  }, [])
+
   const showLeftChevron = startIndex > 0
   const showRightChevron = startIndex < cards.length - visibleCount
   const visibleCards = cards.slice(startIndex, startIndex + visibleCount)
-  const totalDots = 3
-  const [currentDot, setCurrentDot] = useState(0)
+
+  const totalDots = Math.ceil(cards.length / visibleCount)
+  const currentDot = Math.floor(startIndex / visibleCount)
 
   const handlePrevious = () => {
     if (startIndex > 0) {
-      setStartIndex(startIndex - 1)
-      setCurrentDot((prev) => Math.max(prev - 1, 0))
+      setStartIndex(Math.max(0, startIndex - visibleCount))
     }
   }
 
   const handleNext = () => {
     if (startIndex < cards.length - visibleCount) {
-      setStartIndex(startIndex + 1)
-      setCurrentDot((prev) => Math.min(prev + 1, totalDots - 1))
+      setStartIndex(Math.min(cards.length - visibleCount, startIndex + visibleCount))
     }
   }
 
@@ -169,9 +185,9 @@ export default function FeaturesCarousel() {
   }
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto my-0">
+    <div className="relative w-full max-w-6xl mx-auto my-0 px-4">
       <motion.h1
-        className="font-bold font-sans text-4xl mb-8"
+        className="font-bold font-sans text-3xl md:text-4xl mb-8"
         initial={{ opacity: 0, y: "60px" }}
         whileInView={{
           opacity: 1,
@@ -183,42 +199,46 @@ export default function FeaturesCarousel() {
         Our Solutions
       </motion.h1>
 
-      <div className="flex relative gap-4 overflow-visible py-8 px-4">
-        {visibleCards.map((card) => (
-          <div key={card.id} className="flex-none w-[250px] transition-all sm:w-[350px] duration-300 ease-in-out mr-0">
-            <motion.div
-              className="flex flex-col h-[500px] rounded-lg overflow-visible shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1),0_4px_6px_-2px_rgba(0,0,0,0.05)]"
-              variants={cardVariants}
-              initial="initial"
-              whileHover="hovered"
-              animate="initial"
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            >
-              <div className="h-[250px] bg-gray-200 overflow-hidden">
-                <motion.img
-                  src={`images/${card.type.toLowerCase()}.jpg`}
-                  alt={card.title}
-                  className="w-full h-full object-cover"
-                  variants={imageVariants}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                />
-              </div>
-              <div className={`${card.gradient} p-6 flex-grow h-[400px] text-white flex flex-col`}>
-                <div className="flex items-center mb-4 gap-3">
-                  <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-                    {card.type === "INVENTORY" && <InventoryIcon className="text-white" />}
-                    {card.type === "SERVICE" && <ServiceIcon className="text-white w-5 h-5" />}
-                    {card.type === "ANALYTICS" && <AnalyticsIcon className="text-white w-5 h-5" />}
-                    {card.type === "ERP" && <ERPIcon className="text-white w-5 h-5" />}
-                  </div>
-                  <span className="uppercase text-sm font-bold tracking-wider whitespace-nowrap">{card.type}</span>
+      <div className="relative overflow-hidden py-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {visibleCards.map((card) => (
+            <div key={card.id} className="w-full">
+              <motion.div
+                className="flex flex-col h-[500px] rounded-lg overflow-visible shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1),0_4px_6px_-2px_rgba(0,0,0,0.05)]"
+                variants={cardVariants}
+                initial="initial"
+                whileHover="hovered"
+                animate="initial"
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
+                <div className="h-[250px] bg-gray-200 overflow-hidden">
+                  <motion.img
+                    src={`images/${card.type.toLowerCase()}.jpg`}
+                    alt={card.title}
+                    className="w-full h-full object-cover"
+                    variants={imageVariants}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  />
                 </div>
+                <div className={`${card.gradient} p-6 flex-grow h-[400px] text-white flex flex-col`}>
+                  <div className="flex items-center mb-4 gap-3">
+                    <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                      {card.type === "INVENTORY" && <InventoryIcon className="text-white" />}
+                      {card.type === "SERVICE" && <ServiceIcon className="text-white w-5 h-5" />}
+                      {card.type === "ANALYTICS" && <AnalyticsIcon className="text-white w-5 h-5" />}
+                      {card.type === "ERP" && <ERPIcon className="text-white w-5 h-5" />}
+                    </div>
+                    <span className="uppercase text-sm font-bold tracking-wider whitespace-nowrap">{card.type}</span>
+                  </div>
 
-                <h3 className="w-full text-3xl font-bold whitespace-pre-line leading-snug mb-6 px-10">{card.title}</h3>
-              </div>
-            </motion.div>
-          </div>
-        ))}
+                  <h3 className="w-full text-2xl md:text-3xl font-bold whitespace-pre-line leading-snug mb-6 px-4 md:px-10">
+                    {card.title}
+                  </h3>
+                </div>
+              </motion.div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {showLeftChevron && (
