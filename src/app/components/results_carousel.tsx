@@ -1,6 +1,6 @@
 "use client"
 import { motion } from "framer-motion"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 const results = [
@@ -32,7 +32,24 @@ const results = [
 
 export default function ResultsCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const cardsToShow = 4
+  const [cardsToShow, setCardsToShow] = useState(1)
+
+  useEffect(() => {
+    const updateCardsToShow = () => {
+      if (window.innerWidth < 640) {
+        setCardsToShow(1) // Mobile: 1 card
+      } else if (window.innerWidth < 1024) {
+        setCardsToShow(2) // Tablet: 2 cards
+      } else {
+        setCardsToShow(3) // Desktop: 3 cards
+      }
+    }
+
+    updateCardsToShow()
+    window.addEventListener("resize", updateCardsToShow)
+    return () => window.removeEventListener("resize", updateCardsToShow)
+  }, [])
+
   const cardWidthPercentage = 100 / cardsToShow
 
   const handlePrev = () => {
@@ -52,13 +69,13 @@ export default function ResultsCarousel() {
   }
 
   return (
-    <div className="w-full py-16 px-4 sm:px-6 lg:px-8 bg-white">
+    <div className="w-full py-8 sm:py-12 lg:py-16 px-4 sm:px-6 lg:px-8 bg-white">
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="text-3xl md:text-4xl font-bold mb-12 text-black"
+        className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-12 text-black"
       >
         Results We&apos;ve Delivered
       </motion.h2>
@@ -66,17 +83,21 @@ export default function ResultsCarousel() {
       <div className="relative mx-auto max-w-6xl">
         <div className="overflow-hidden">
           <div
-            className="flex transition-transform duration-500 gap-5 ease-in-out"
+            className="flex transition-transform duration-500 gap-3 sm:gap-4 lg:gap-5 ease-in-out"
             style={{
               transform: `translateX(-${currentIndex * cardWidthPercentage}%)`,
               width: `${(results.length * 100) / cardsToShow}%`,
             }}
           >
             {results.map((item, index) => (
-              <div key={index} className="px-2 flex-shrink-0" style={{ width: `${cardWidthPercentage * 0.73}%` }}>
-                <div className="bg-white p-6 h-70 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center items-center text-center space-y-8">
-                  <h3 className="text-4xl md:text-5xl font-bold mb-6 text-[#FF6B35]">{item.title}</h3>
-                  <p className="text-black text-lg mt-4 mb-6">{item.description}</p>
+              <div
+                key={index}
+                className="px-1 sm:px-2 flex-shrink-0"
+                style={{ width: `${cardWidthPercentage * 0.9}%` }}
+              >
+                <div className="bg-white p-4 sm:p-6 min-h-[200px] sm:min-h-[240px] border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center items-center text-center space-y-3 sm:space-y-6">
+                  <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#FF6B35]">{item.title}</h3>
+                  <p className="text-black text-sm sm:text-base lg:text-lg leading-snug">{item.description}</p>
                 </div>
               </div>
             ))}
@@ -84,39 +105,39 @@ export default function ResultsCarousel() {
         </div>
 
         {currentIndex > 0 && (
-          <div className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white p-4 rounded-full shadow-lg hover:bg-gray-100 border border-gray-300">
+          <div className="absolute left-0 sm:left-2 top-1/2 -translate-y-1/2 z-20 bg-white p-2 sm:p-3 lg:p-4 rounded-full shadow-lg hover:bg-gray-100 border border-gray-300">
             <button onClick={handlePrev} className="flex items-center justify-center">
               <motion.div whileHover={{ x: -10 }} transition={{ type: "spring", stiffness: 100, damping: 20 }}>
-                <ChevronLeft className="h-16 w-16 text-orange-500" />
+                <ChevronLeft className="h-6 w-6 sm:h-10 sm:w-10 lg:h-12 lg:w-12 text-orange-500" />
               </motion.div>
             </button>
           </div>
         )}
 
         {currentIndex < results.length - cardsToShow && (
-          <div className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white p-6 rounded-full shadow-lg hover:bg-gray-100 border border-gray-300">
+          <div className="absolute right-0 sm:right-2 top-1/2 -translate-y-1/2 z-20 bg-white p-2 sm:p-3 lg:p-4 rounded-full shadow-lg hover:bg-gray-100 border border-gray-300">
             <button onClick={handleNext} className="flex items-center justify-center">
               <motion.div whileHover={{ x: 10 }} transition={{ type: "spring", stiffness: 100, damping: 20 }}>
-                <ChevronRight className="h-16 w-16 text-orange-500" />
+                <ChevronRight className="h-6 w-6 sm:h-10 sm:w-10 lg:h-12 lg:w-12 text-orange-500" />
               </motion.div>
             </button>
           </div>
         )}
       </div>
 
-      <div className="flex justify-center mt-10 gap-5">
+      <div className="flex justify-center mt-6 sm:mt-8 lg:mt-10 gap-2 sm:gap-3 lg:gap-5">
         {Array.from({
           length: Math.ceil(results.length - cardsToShow + 1),
         }).map((_, index) => (
           <motion.button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`mx-1 w-5 h-5 rounded-full transition-colors ${
+            className={`w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 rounded-full transition-colors ${
               index === currentIndex ? "bg-orange-500" : "bg-gray-300 hover:bg-gray-400"
             }`}
             aria-label={`Go to slide ${index + 1}`}
             animate={{
-              scale: index === currentIndex ? 1.5 : 1,
+              scale: index === currentIndex ? 1.3 : 1,
             }}
           />
         ))}
